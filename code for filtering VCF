@@ -1,0 +1,20 @@
+library(VariantAnnotation)
+
+# Path to your updated VCF file
+vcf_file <- "C:/Users/mpm15/OneDrive/Documents/Oncoprint/VCF_Files_3_14_2024/DNA_TN23-150440_230512_A01691_0156_BHW2VVDSX5_2023-05-17_10_57.vcf"
+
+# Read your VCF file
+vcf <- readVcf(vcf_file)
+
+# Define filters to remove
+filters_to_remove <- c("lowQ","lowDP","Benign")
+
+# Filter variants based on specific criteria
+filtered_vcf <- vcf[!(vcf@info$FILTER %in% filters_to_remove), ]
+
+# Define folder location and file name for filtered VCF
+output_folder <- "C:/Users/mpm15/OneDrive/Documents/Oncoprint/filtered VCF"
+output_file <- "filteredvcf_DNA_TN20-172096_210114_NB551501_0288_AH3N7LBGXH-NYS_2023-01-06_20_40.vcf"
+
+# Save filtered VCF file
+writeVcf(filtered_vcf, file.path(output_folder, output_file))
